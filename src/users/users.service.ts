@@ -24,7 +24,7 @@ export class UsersService {
       console.log('User Saved', savedUser);
       return savedUser;
     } catch (error) {
-      console.error('dwqdq' + error);
+      console.error('User Failed Error Message:' + error);
       throw error;
     }
   }
