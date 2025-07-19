@@ -5,10 +5,12 @@ import { AuthDTO } from 'src/auth/dto/auth.dto';
 
 @Controller('user')
 export class UserController {
+  // 생성자
   constructor(private readonly userService: UsersService) {}
 
+  // post mapping으로 메소드 생성
   @Post('/signup')
-  async singup(@Body() authDTO: AuthDTO.SignUp): Promise<string> {
+  async signup(@Body() authDTO: AuthDTO.SignUp): Promise<string> {
     const { email, nickname } = authDTO;
 
     const hasEmail = await this.userService.findByEmail(email);
