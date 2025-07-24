@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Body, ConflictException, Controller, Post } from '@nestjs/common';
+import { Body, ConflictException, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthDTO } from 'src/auth/dto/auth.dto';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -27,5 +28,11 @@ export class UserController {
       nickname: authDTO.nickname,
     });
     return `${userEntity.email}님의'회원가입 성공`;
+  }
+  @UseGuards(AuthGuard)
+  @Get('/')
+  async getProfile(@Req() req: any) {
+    const user = req.user;
+    return user;
   }
 }
